@@ -1,7 +1,22 @@
 version: "3.8"
 
 services:
-  database:
+  webapp:
+    container_name: modec-tech-challenge-webapp
+    image: node:21-bookworm
+    ports: 
+      - $WEBAPP_PORT:$WEBAPP_PORT
+    restart: always
+    working_dir: /webapp
+    build:
+      context: ./webapp
+    volumes:
+      - ./webapp:/webapp
+      - ./.env:/webapp/.env
+    command: sh -c "npm install && npm run dev"
+    depends_on:
+      - db
+  db:
     container_name: modec-tech-challenge-db
     image: mysql:8.0
     restart: always
