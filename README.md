@@ -19,8 +19,10 @@ docker compose up -d
 - If you need to interact with the database, run:
 ```bash
 docker exec -it modec-tech-challenge-db /bin/sh
-source /.env && export $(grep DB_PASSWORD /.env | xargs)
-source /.env && export $(grep DB_USER /.env | xargs)
-source /.env && export $(grep DB_NAME /.env | xargs)
 mysql -u $DB_USER --password=$DB_PASSWORD -D $DB_NAME
+```
+
+- To stop the project, run:
+```bash
+docker compose down
 ```
