@@ -22,6 +22,9 @@ docker exec -it modec-tech-challenge-db /bin/sh
 mysql -u $DB_USER --password=$DB_PASSWORD -D $DB_NAME
 ```
 
+Now you can access the web application through [**http://localhost:3000**](http://localhost:3000)
+
+## Stop the project:
 - To stop the project, run:
 ```bash
 docker compose down
