@@ -5,7 +5,7 @@ services:
     container_name: modec-tech-challenge-webapp
     image: node:21-bookworm
     ports: 
-      - $WEBAPP_PORT:$WEBAPP_PORT
+      - $NEXT_PUBLIC_WEBAPP_PORT:$NEXT_PUBLIC_WEBAPP_PORT
     restart: always
     working_dir: /webapp
     build:

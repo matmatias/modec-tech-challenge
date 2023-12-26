@@ -1,6 +1,6 @@
+import { WEBAPP_URL } from "@/http";
 import { Employee, EmployeeFilter } from "@/model";
 
-const URL = "http://localhost:3000";
 const ENDPOINT = "api/employees";
 
 interface IFetchEmployees {
@@ -13,7 +13,8 @@ export class FetchEmployeesService implements IFetchEmployees {
       this.getNonEmptyFilter(filter);
     const searchParams: string = this.getSearchParams(nonEmptyFilter);
 
-    const requestUrl = `${URL}/${ENDPOINT}?${searchParams}`;
+    const requestUrl = `${WEBAPP_URL}/${ENDPOINT}?${searchParams}`;
+    // const requestUrl = `http://localhost:3000/api/employees?${searchParams}`;
     const response = await fetch(requestUrl);
     const employees: Employee[] = (await response.json()) as Employee[];
 
