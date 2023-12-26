@@ -2,26 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root { */
-/*   --foreground-rgb: 0, 0, 0; */
-/*   --background-start-rgb: 214, 219, 220; */
-/*   --background-end-rgb: 255, 255, 255; */
-/* } */
-/**/
-/* @media (prefers-color-scheme: dark) { */
-/*   :root { */
-/*     --foreground-rgb: 255, 255, 255; */
-/*     --background-start-rgb: 0, 0, 0; */
-/*     --background-end-rgb: 0, 0, 0; */
-/*   } */
-/* } */
+:root {
+    --primary-color: rgb(55, 65, 81);
+}
 
+@font-face {
+  font-family: "Bank Gothic";
+  src: url(/bankgothic.otf);
+}
+
+html,
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+input,
+select {
+    padding: 5px 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.default-btn {
+  background-color: rgb(245, 245, 245);
+  border-style: solid;
+  border-color: rgb(110, 110, 110);
+  border-width: 1px;
+  border-radius: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.primary-text {
+  color: var(--primary-color);
+}
+
+.default-th {
+  @apply text-center border-black border-solid;
+  border-width: 2px;
+}
+
+.default-td {
+  @apply text-center border-gray-300 border-solid;
+  border-width: 1px;
+}
+
+.default-table {
+  @appy border-solid;
+  border-color: black;
+  border-width: 2px;
+}
+
+.spinner {
+ border: 16px solid #f3f3f3;
+ border-top: 16px solid rgb(50, 50, 50);
+ border-radius: 50%;
+ width: 120px;
+ height: 120px;
+ animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+ 0% { transform: rotate(0deg); }
+ 100% { transform: rotate(360deg); }
 }

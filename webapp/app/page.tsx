@@ -35,19 +35,26 @@ export default function Home() {
 
   return (
     <Fragment>
-      <header className="flex flex-row">
-        <div>MODEC</div>
-        <h1>Employee Search</h1>
+      <header
+        style={{ borderBottom: "2px solid #ff0000" }}
+        className="flex flex-row items-center justify-between p-4"
+      >
+        <img src="/modec_logo.png" alt="modec logo" width={150} height={35} />
+        <h1
+          style={{ fontFamily: "Bank Gothic" }}
+          className="flex flex-row text-4xl text-gray-500"
+        >
+          Employee Search
+        </h1>
         <div>Welcome, Fulano!</div>
       </header>
-      <div>English</div>
-      <main>
-        <div>
-          <p>Select Filters:</p>
+      <main className="px-3 border-solid border-black pb-8">
+        <section className="flex flex-col gap-2 mt-8">
+          <h2 className="text-lg font-normal primary-text">Select Filters:</h2>
           <div className="flex flex-col">
             {filtersUids.map((uid: string, index: number) => {
               return (
-                <div className="flex flex-row" key={uid}>
+                <div className="flex flex-row gap-14 items-center" key={uid}>
                   <Filter
                     employeeFilter={employeeFilter}
                     setEmployeeFilter={setEmployeeFilter}
@@ -56,14 +63,19 @@ export default function Home() {
                     setSelectedOptions={setSelectedOptions}
                   />
                   {isLastFilter(index, filtersQty) && (
-                    <div>
+                    <div className="flex flex-row items-center gap-1">
                       <button
                         disabled={isFiltersQtyMax(filtersQty)}
                         onClick={() =>
                           setFiltersUids((prev) => [...prev, getuid()])
                         }
                       >
-                        +
+                        <img
+                          src="/plus-button.png"
+                          alt="Remove"
+                          width={22}
+                          height={22}
+                        />
                       </button>
                       <button
                         disabled={isFiltersQtyMin(filtersQty)}
@@ -71,7 +83,12 @@ export default function Home() {
                           setFiltersUids((prev) => prev.slice(0, -1))
                         }
                       >
-                        -
+                        <img
+                          src="/minus-button.png"
+                          alt="Remove"
+                          width={22}
+                          height={22}
+                        />
                       </button>
                     </div>
                   )}
@@ -79,8 +96,9 @@ export default function Home() {
               );
             })}
           </div>
-          <div className="flex flex-row">
+          <div className="flex flex-row gap-5 mt-6">
             <button
+              className="default-btn"
               onClick={async () => {
                 setIsLoading(true);
                 const fetchEmployeesService = new FetchEmployeesService();
@@ -93,6 +111,7 @@ export default function Home() {
               Search
             </button>
             <button
+              className="default-btn"
               onClick={() =>
                 setFiltersUids((prev) => {
                   prev.splice(1);
@@ -103,15 +122,48 @@ export default function Home() {
               Clear
             </button>
           </div>
-        </div>
-        {isLoading && <h3>..............LOADING..............</h3>}
+        </section>
+        {isLoading && (
+          <div className="mt-4 flex flex-row justify-center">
+            <div className="spinner"></div>
+          </div>
+        )}
         {employees.length > 0 && (
-          <section>
+          <section className="mt-4 flex flex-col">
+            <h2>Search Result:</h2>
             <EmployeesList employees={employees} />
           </section>
         )}
       </main>
-      <footer>2019 - MODEC</footer>
+      <footer
+        style={{ borderTop: "1px solid rgb(200, 200, 200)" }}
+        className="px-3 mt-10 pt-10 pb-6 flex flex-col primary-text gap-4"
+      >
+        <span>© 2019 - MODEC</span>
+        <div className="flex flex-col items-center">
+          <span>Made by Matheus Matias @ 2023</span>
+          <ul className="flex flex-row justify-center gap-2">
+            <li>
+              <a
+                className="underline text-black"
+                href="https://github.com/matmatias"
+                target="_blank"
+              >
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a
+                className="underline text-black"
+                href="https://linkedin.com/in/matheus-matias-9a2a6519a"
+                target="_blank"
+              >
+                LinkedIn
+              </a>
+            </li>
+          </ul>
+        </div>
+      </footer>
     </Fragment>
   );
 }
@@ -158,68 +210,73 @@ function Filter({
 
   return (
     <Fragment>
-      <select
-        value={selected}
-        onChange={(evt) => {
-          if (selected !== "") {
-            resetFilterProp(selected, setEmployeeFilter);
-          }
-          setSelectedOptions((prev) => {
-            const selectedOption = evt.target.options[evt.target.selectedIndex];
-            const label =
-              selectedOption.textContent || selectedOption.innerText;
-            const value = evt.target.value;
-            return [
-              /* remove the old selected option from selectedOptions */
-              ...prev.filter((option) => {
-                return option.value !== selected;
-              }),
-              /* add the new selected to selectedOptions */
-              {
-                label: label as SelectOptionsLabelsEnum,
-                value: value as SelectOptionsValuesEnum,
-              },
-            ];
-          });
-          setSelected(evt.target.value as SelectOptionsValuesEnum);
-        }}
-      >
-        {selectOptions.map((selectOption) =>
-          selectOption.value === SelectOptionsValuesEnum.Default ? (
-            <option
-              defaultValue={SelectOptionsValuesEnum.Default}
-              disabled
-              value={SelectOptionsValuesEnum.Default}
-              key={selectOption.value}
-            >
-              {selectOption.label}
-            </option>
-          ) : (
-            <option
-              value={selectOption.value}
-              disabled={
-                /* check if this option is present in selectedOptions */
-                isSelectOptionSelected(selectOption, selectedOptions)
-              }
-              key={selectOption.value}
-            >
-              {selectOption.label}
-            </option>
-          ),
-        )}
-      </select>
-      {selected !== SelectOptionsValuesEnum.Default && (
-        <input
-          value={employeeFilter[selected]}
+      <div className="flex flex-row gap-4">
+        <select
+          className="w-64"
+          value={selected}
           onChange={(evt) => {
-            const selectedFilterProp = { [selected]: evt.target.value };
-            setEmployeeFilter((prev) => ({
-              ...prev,
-              ...selectedFilterProp,
-            }));
+            if (selected !== "") {
+              resetFilterProp(selected, setEmployeeFilter);
+            }
+            setSelectedOptions((prev) => {
+              const selectedOption =
+                evt.target.options[evt.target.selectedIndex];
+              const label =
+                selectedOption.textContent || selectedOption.innerText;
+              const value = evt.target.value;
+              return [
+                /* remove the old selected option from selectedOptions */
+                ...prev.filter((option) => {
+                  return option.value !== selected;
+                }),
+                /* add the new selected to selectedOptions */
+                {
+                  label: label as SelectOptionsLabelsEnum,
+                  value: value as SelectOptionsValuesEnum,
+                },
+              ];
+            });
+            setSelected(evt.target.value as SelectOptionsValuesEnum);
           }}
-        />
-      )}
+        >
+          {selectOptions.map((selectOption) =>
+            selectOption.value === SelectOptionsValuesEnum.Default ? (
+              <option
+                defaultValue={SelectOptionsValuesEnum.Default}
+                disabled
+                value={SelectOptionsValuesEnum.Default}
+                key={selectOption.value}
+              >
+                {selectOption.label}
+              </option>
+            ) : (
+              <option
+                value={selectOption.value}
+                disabled={
+                  /* check if this option is present in selectedOptions */
+                  isSelectOptionSelected(selectOption, selectedOptions)
+                }
+                key={selectOption.value}
+              >
+                {selectOption.label}
+              </option>
+            ),
+          )}
+        </select>
+        {selected !== SelectOptionsValuesEnum.Default && (
+          <input
+            className="w-80"
+            value={employeeFilter[selected]}
+            onChange={(evt) => {
+              const selectedFilterProp = { [selected]: evt.target.value };
+              setEmployeeFilter((prev) => ({
+                ...prev,
+                ...selectedFilterProp,
+              }));
+            }}
+          />
+        )}
+      </div>
     </Fragment>
   );
 }
@@ -261,24 +318,24 @@ interface EmployeesListProps {
 
 function EmployeesList({ employees }: EmployeesListProps) {
   return (
-    <table>
+    <table className="w-full default-table">
       <thead>
         <tr>
-          <th>ID</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Department</th>
-          <th>Age</th>
+          <th className="default-th">ID</th>
+          <th className="default-th">First Name</th>
+          <th className="default-th">Last Name</th>
+          <th className="default-th">Department</th>
+          <th className="default-th">Age</th>
         </tr>
       </thead>
       <tbody>
         {employees.map((employee) => (
           <tr key={employee.id}>
-            <td>{employee.id}</td>
-            <td>{employee.first_name}</td>
-            <td>{employee.last_name}</td>
-            <td>{employee.department}</td>
-            <td>{employee.age}</td>
+            <td className="default-td">{employee.id}</td>
+            <td className="default-td">{employee.first_name}</td>
+            <td className="default-td">{employee.last_name}</td>
+            <td className="default-td">{employee.department}</td>
+            <td className="default-td">{employee.age}</td>
           </tr>
         ))}
       </tbody>
