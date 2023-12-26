@@ -8,7 +8,9 @@ on:
     types: [opened, synchronize, reopened, closed]
     branches:
       - master
-
+env:
+  NEXT_PUBLIC_NODE_ENV: 'production'
+  NEXT_PUBLIC_WEBAPP_API_URL: 'ambitious-ground-01c27ff10.4.azurestaticapps.net'
 jobs:
   build_and_deploy_job:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
