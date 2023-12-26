@@ -112,12 +112,14 @@ export default function Home() {
             </button>
             <button
               className="default-btn"
-              onClick={() =>
+              onClick={() => {
                 setFiltersUids((prev) => {
-                  prev.splice(1);
+                  prev.splice(0);
+                  prev.push(getuid());
                   return [...prev];
-                })
-              }
+                });
+                setEmployees([]);
+              }}
             >
               Clear
             </button>
