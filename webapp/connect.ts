@@ -1,7 +1,4 @@
-import { mysql, config, path } from "@/libs/backend";
-
-const envPath = path.resolve(__dirname, "../.env");
-config({ path: envPath });
+import { mysql } from "@/libs/backend";
 
 export const pool = mysql
   .createPool({
