@@ -37,7 +37,7 @@ export default function Home() {
     <Fragment>
       <header
         style={{ borderBottom: "2px solid #ff0000" }}
-        className="flex flex-row items-center justify-between p-4"
+        className="flex flex-row items-center justify-between p-4 bg-neutral-100"
       >
         <img src="/modec_logo.png" alt="modec logo" width={150} height={35} />
         <h1
