@@ -1,11 +1,22 @@
 # Modec Tech Challenge
 
-## Technologies Used:
+## About:
+This is the MODEC's tech challenge implementation. The web application can be accessed [here](https://ambitious-ground-01c27ff10.4.azurestaticapps.net/).
 
+## Features:
+Search employees by first name, last name, department and/or age.
+
+## Technologies Used:
+- [Docker](https://www.docker.com/) ^24
+### Webapp:
+- [React](https://react.dev/) ^18
+- [Typescript](https://www.typescriptlang.org/) ^5
+- [NextJS](https://nextjs.org/) ^13
+- [tailwindCSS](https://tailwindcss.com/) ^3.3
 ### Database:
 - [MySQL](https://www.mysql.com/) 8.0
 
-## Local setup
+## Local setup:
 - Setup environment variables:
 ```bash
 cp .env.example .env
