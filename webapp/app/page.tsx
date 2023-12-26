@@ -51,7 +51,7 @@ export default function Home() {
       <main className="px-3 border-solid border-black pb-8">
         <section className="flex flex-col gap-2 mt-8">
           <h2 className="text-lg font-normal primary-text">Select Filters:</h2>
-          <div className="flex flex-col">
+          <div className="flex flex-col gap-2">
             {filtersUids.map((uid: string, index: number) => {
               return (
                 <div className="flex flex-row gap-14 items-center" key={uid}>
