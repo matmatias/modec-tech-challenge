@@ -1,7 +1,7 @@
 # Modec Tech Challenge
 
 ## About:
-This is the MODEC's tech challenge implementation. The web application can be accessed [here](https://ambitious-ground-01c27ff10.4.azurestaticapps.net/).
+This is the MODEC's tech challenge implementation.
 
 This project is composed of two parts: Database and Webapp.
 
@@ -11,16 +11,11 @@ MySQL 8 database to serve employees data.
 ### Webapp:
 The webapp was written in NextJS 13, and is composed of two parts: Backend and Frontend.
 
-Both the database and the webapp are hosted in azure's cloud. The Database is hosted as a "Azure Database for MySQL flexible server" service and the Webapp is hosted as a "Static Web App" service.
-
-All sensitive data is consumed through a secret .env file to load them as environment variables.
-
 #### Backend:
 The backend consumes the MySQL database based on params received by the frontend, and return the data in JSON format;
 
 #### Frontend:
 The frontend consumes the backend (/api/employees http endpoint, to be more precise) and displays the employees data in a table;
-
 
 ## Features:
 Search employees by first name, last name, department and/or age.
